@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  game-server:
+    image: didstopia/7dtd-server
+    container_name: game-server
+    volumes:
+      - $GAMESTATE:/steamcmd/7dtd
+    ports:
+      - "26900:26900"
+      - "25000:25000"
+      - "25001:25001"
+      - "25002:25002"
+      - "25003:25003"
+      - "8080:8080"
+      - "8081:8081"
+  
+  admin-panel:
+    image: portainer/portainer
+    container_name: admin-panel
+    ports:
+      - "9000:9000"
+    volumes:
+     - /var/run/docker.sock:/var/run/docker.sock
+     - /var/lib/portainer:/data
